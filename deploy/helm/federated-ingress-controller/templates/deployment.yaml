@@ -1,0 +1,56 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "name" . }}
+  namespace: {{ .Values.federationHostNamespace }}
+  labels:
+    app: {{ template "name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: POD_NAMESPACE
+          value: "{{ .Values.federationHostNamespace }}"
+        command:
+        - /federatedingress-controller
+        - --v={{ .Values.glogLevel }}
+        - --dnsProvider={{ .Values.dnsProvider}}
+        {{ if eq .Values.dnsProvider "dyndns"}}
+        - --dnsProviderConfig=/etc/federation/dns-provider-config/{{ .Values.dyndns.config}}
+        {{ else if eq .Values.dnsProvider "coredns" }}
+        - --dnsProviderConfig=/etc/federation/dns-provider-config/{{ .Values.coredns.config}}
+        {{ else if eq .Values.dnsProvider "google-clouddns" }}
+        - --dnsProviderConfig=/etc/federation/dns-provider-config/{{ .Values.clouddns.config}}
+        {{ end }}
+        - --fkubeApiServer={{ .Values.federationEndpoint }}
+        - --fkubeName={{ .Values.federationHostNamespace }}
+        - --domain={{ .Values.domain }}
+        volumeMounts:
+        - mountPath: /etc/federation/controller-manager
+          name: {{ .Values.federationContext }}-controller-manager-kubeconfig
+          readOnly: true
+        - mountPath: /etc/federation/dns-provider-config
+          name: {{ .Values.federationContext }}-dns-provider-config
+          readOnly: true
+      serviceAccountName: federation-controller-manager
+      serviceAccount: federation-controller-manager
+      volumes:
+      - name: {{ .Values.federationContext }}-controller-manager-kubeconfig
+        secret:
+          secretName: {{ .Values.federationContext }}-controller-manager-kubeconfig
+      - name: {{ .Values.federationContext }}-dns-provider-config
+        configMap:
+          name: {{ .Values.federationContext }}-dns-provider-config
+

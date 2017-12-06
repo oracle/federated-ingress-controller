@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fkube-dns-provider-config
+  namespace: fkube-system
+data:
+  {{ if eq .Values.dnsProvider "dyndns"}}
+  dyndns-provider-config: |
+    [Global]
+    zones = {{ .Values.dyndns.zones }}
+    customer = {{ .Values.dyndns.customer }}
+    user = {{ .Values.dyndns.user }}
+    password = {{ .Values.dyndns.password }}
+  {{ else if eq .Values.dnsProvider "coredns" }}
+  coredns-provider-config: |
+    [Global]
+    etcd-endpoints = {{ .Values.coredns.etcdEndpoints }}
+    zones = {{ .Values.coredns.zones }}
+  {{ else if eq .Values.dnsProvider "google-clouddns" }}
+  clouddns-provider-config: |
+    [Global]
+    project-id = {{ .Values.clouddns.projectId }}
+    {{ if .Values.clouddns.tokenUrl }}
+    token-url = {{ .Values.clouddns.tokenUrl }}
+    {{ end }}
+    {{ if .Values.clouddns.tokenBody }}
+    token-body = {{ .Values.clouddns.tokenBody }}
+    {{ end }}
+  {{ end }}
