@@ -1,5 +1,3 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/oracle/kubernetes-incubator/federated-ingress-controller)](https://goreportcard.com/report/github.com/oracle/kubernetes-incubator/federated-ingress-controller)
-
 # Federated Ingress Round Robin DNS Controller
 
 The Federated Ingress Round Robin DNS Controller allows you to create federated ingress resource with the Kubernetes cluster of your choice (Amazon Web Services (AWS), Google Kubernetes Engine (GKE), Minikube, etc), and route requests to your application based on the defined ingress rules.
@@ -27,7 +25,7 @@ get src:
 - `export K8S_INCUBATOR_DIR="$GOPATH/src/github.com/kubernetes-incubator"`
 - `mkdir -p $K8S_INCUBATOR_DIR`
 - `cd $K8S_INCUBATOR_DIR`
-- `git clone https://github.com/oracle/kubernetes-incubator/federated-ingress-controller`
+- `git clone https://github.com/oracle/federated-ingress-controller`
 
 build:
 - `export DOCKER_REGISTRY=docker.io/changeme`
