@@ -1,4 +1,4 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/oracle/kubernetes-incubator/federated-ingress-controller)](https://goreportcard.com/report/github.com/oracle/kubernetes-incubator/federated-ingress-controller)
+[![Go Report Card](https://goreportcard.com/badge/github.com/oracle/federated-ingress-controller)](https://goreportcard.com/report/github.com/oracle/federated-ingress-controller)
 
 # Federated Ingress Round Robin DNS Controller
 
@@ -27,7 +27,7 @@ get src:
 - `export K8S_INCUBATOR_DIR="$GOPATH/src/github.com/kubernetes-incubator"`
 - `mkdir -p $K8S_INCUBATOR_DIR`
 - `cd $K8S_INCUBATOR_DIR`
-- `git clone https://github.com/oracle/kubernetes-incubator/federated-ingress-controller`
+- `git clone https://github.com/oracle/federated-ingress-controller`
 
 build:
 - `export DOCKER_REGISTRY=docker.io/changeme`
