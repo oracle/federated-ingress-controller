@@ -5,7 +5,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 
 - Read [Set up Cluster Federation with Kubefed](https://kubernetes.io/docs/tasks/federation/set-up-cluster-federation-kubefed/) and understand how to set up a Federation.
-- This document assumes that you have a federation set up with one or more managed clusters. Please note, when you start federation controller plane, you need to disable the default Federated Ingress Controller that comes with it (see more details in the "Start Federation Controller Plane" section below). You can manually create managed clusters and join them to the Federation, or alternatively you can use the [cluster-manager](https://github.com/oracle/cluster-manager) to automatically provision and join the managed clusters to the Federation.
+- This document assumes that you have a federation set up with one or more managed clusters. Note that when you start the federation controller plane you need to disable the default Federated Ingress Controller that comes with it (see more details in the "Start Federation Controller Plane" section below). You can manually create managed clusters and join them to the Federation, or alternatively you can use the [cluster-manager](https://github.com/oracle/cluster-manager) to automatically provision and join the managed clusters to the Federation.
 - The managed clusters must have an ingress controller installed, for example, you can install Nginx Ingress Controller. The ingress controller is required at the cluster level because it will be used to set the Status.LoadBalancer.Ingress field on the ingress object with its external load balancer IP. 
 - Set up a hosted zone for the domain where the DNS records will be published. You can set up a DNS server of your choice such as aws-route53, coredns, dyndns, and google-clouddns.
 
@@ -71,7 +71,7 @@ These instructions assumes that you have a federation set up with one or more ma
 	kubectl config use-context <your federation>
 	```
 
-2. Create a simple application deployment and service. For example, you can refer to these file samples in the [example](./example) folder.
+2. Create a simple application deployment and service. For example, you can refer to these file samples in the [example](../example) folder.
 	```
 	kubectl create namespace akube-app
 	kubectl create -f example/helloworld-deployment.yaml -n akube-app
@@ -115,7 +115,7 @@ These instructions assumes that you have a federation set up with one or more ma
 	kubectl delete -f helloworld-service.yaml -n akube-app
 	kubectl delete namespace akube-app
 	```
-6. (Optional) Uninstall the Federated Ingress Controller at the end. 
+6. (Optional) Uninstall the Federated Ingress Controller. 
     ```
     kubectl config use-context <your federation host cluster>
     helm delete --purge federated-ingress-controller
