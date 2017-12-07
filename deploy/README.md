@@ -42,7 +42,7 @@ helm install stable/nginx-ingress --set controller.publishService.enabled=true
 	* `domain`: this is where the ingress endpoints are published. Set this to the zone that the DNS provider is hosting.
 	* `image`: set `respository` to where the Federated Ingress Controller image is published, and `tag` to the desired tag/version of the image.
 
-3. Install the Federated Ingress Controller.
+3. Install the Federated Ingress Controller. Note that the following command makes a reference to the helm chart in the project's [deploy](./) directory: helm/federated-ingress-controller. Therefore this command should either run from the deploy directory or may refer to the helm chart in the deploy directory.
     ```
     helm init
     sleep 30 # wait for tiller pod to be active
@@ -53,7 +53,7 @@ helm install stable/nginx-ingress --set controller.publishService.enabled=true
 
 1. Verify if the Federated Ingress Controller is installed: 
     ```
-    helm ls
+    helm ls | grep federated-ingress-controller
     ```
 
 2. Verify if the federated ingress controller pod is running and check the log:

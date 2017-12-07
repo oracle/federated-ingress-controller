@@ -1,12 +1,12 @@
 # Federated Ingress Round Robin DNS Controller
 
-The Federated Ingress Round Robin DNS Controller allows you to create federated ingress resource with the Kubernetes cluster of your choice (Amazon Web Services (AWS), Google Kubernetes Engine (GKE), Minikube, etc), and route requests to your application based on the defined ingress rules.
+The Federated Ingress Round Robin DNS Controller allows you to create federated ingress resource with the Kubernetes cluster of your choice (Amazon Web Services (AWS), Google Kubernetes Engine (GKE), etc), and route requests to your application based on the defined ingress rules.
 
 ## Before You Begin
 
 The default Federated Ingress Controller, which is part of the [Federation project](https://github.com/kubernetes/federation) has a dependency on GKE cluster and global load balancer. So the Federated Ingress resource can work only with GKE cluster in the Federation project.
 
-The Federated Ingress Round Robin DNS Controller removes this restriction and allows the federated ingress to work with GKE cluster as well as other types of Kubernetes clusters such as AWS and Minikube. It creates DNS records for ingress endpoints and uses DNS server to do the routing. You can choose different DNS provider such as aws-route53, coredns, dyndns, and google-clouddns as the DNS server.
+The Federated Ingress Round Robin DNS Controller removes this restriction and allows the federated ingress to work with GKE cluster as well as other types of Kubernetes clusters such as AWS. It creates DNS records for ingress endpoints and uses DNS server to do the routing. You can choose different DNS provider such as aws-route53, coredns, dyndns, and google-clouddns as the DNS server.
 
 <img src="./federated_ingress_controller.png" alt="Federated Ingress Controller" width="60%" height="60%"/>
 <figcaption> Figure:1  Federated Ingress Round Robin DNS Controller Architecture</figcaption>
