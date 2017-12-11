@@ -1,16 +1,5 @@
 box: golang
 
-dev:  # dev pipeline
-  box: nodesource/trusty
-  steps:  # the steps, i.e. stages, of the pipeline. Steps are pre-written bash scripts by wercker or community
-          # For more on steps, see http://devcenter.wercker.com/docs/steps/index.html or https://app.wercker.com/#explore
-          # To develop your own steps and submit to the wercker repo, see http://devcenter.wercker.com/docs/steps/creating-steps.html
-    - internal/shell:
-        cmd: /bin/sh
-        code: |
-          echo "current directory:"
-          pwd
-
 build:
   # The steps that will be executed on build
   # Steps make up the actions in your pipeline
@@ -28,11 +17,8 @@ build:
         name: go build
         code: |
           make clean check bin
-          pwd
-          env|sort
-          mv bin $WERCKER_OUTPUT_DIR
           # what's in WERCKER_OUTPUT_DIR now?
-          ls -la $WERCKER_OUTPUT_DIR
+          mv bin $WERCKER_OUTPUT_DIR
           cd $WERCKER_OUTPUT_DIR/bin/linux
           ls -la
 
