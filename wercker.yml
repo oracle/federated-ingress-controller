@@ -1,16 +1,15 @@
 box: golang
 
 dev:  # dev pipeline
+  box: nodesource/trusty
   steps:  # the steps, i.e. stages, of the pipeline. Steps are pre-written bash scripts by wercker or community
           # For more on steps, see http://devcenter.wercker.com/docs/steps/index.html or https://app.wercker.com/#explore
           # To develop your own steps and submit to the wercker repo, see http://devcenter.wercker.com/docs/steps/creating-steps.html
-    - internal/watch:  # watches files for changes
+    - internal/shell:
+        cmd: /bin/sh
         code: |
-          go build ./...
-          ./source
-        reload: true # -> restarts app if changes detected, so changes are reflected immediately
-
-    - internal/shell
+          echo "current directory:"
+          pwd
 
 build:
   # The steps that will be executed on build
@@ -43,4 +42,11 @@ build:
         code: |
           go test ./...
 
-    - internal/store-container
+  after-steps:
+    - internal/docker-push:
+         username: $WCR_USERNAME
+         password: $WCR_PASSWORD
+         repository: wcr.io/gam/federation
+         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
+         working-dir: /pipeline/source
+         entrypoint: /federatedingress-controller
