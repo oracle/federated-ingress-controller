@@ -1,3 +1,5 @@
+# on gitlab [![pipeline status](https://gitlab-odx.oracle.com/oss/kubernetes-incubator/federated-ingress-controller/badges/master/pipeline.svg)](https://gitlab-odx.oracle.com/oss/kubernetes-incubator/federated-ingress-controller/commits/master)
+
 [![Go Report Card](https://goreportcard.com/badge/github.com/oracle/federated-ingress-controller)](https://goreportcard.com/report/github.com/oracle/federated-ingress-controller)
 
 # Federated Ingress Round Robin DNS Controller
