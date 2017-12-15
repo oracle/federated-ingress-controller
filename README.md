@@ -1,3 +1,4 @@
+[![wercker status](https://app.wercker.com/status/06192831c0abb6f70c1cbaffe96dcb1f/s/ "wercker status")](https://app.wercker.com/project/byKey/06192831c0abb6f70c1cbaffe96dcb1f)
 [![Go Report Card](https://goreportcard.com/badge/github.com/oracle/federated-ingress-controller)](https://goreportcard.com/report/github.com/oracle/federated-ingress-controller)
 
 # Federated Ingress Round Robin DNS Controller
